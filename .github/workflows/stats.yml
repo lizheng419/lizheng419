@@ -32,11 +32,11 @@ jobs:
       - run: python update_profile.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Save updated images
+      - name: Save updated profile
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- img/dark.svg img/light.svg
+          git add -- README.md
           if ! git diff --cached --quiet; then
             git commit -m 'chore: refresh public profile stats'
             git push

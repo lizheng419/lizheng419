@@ -1,7 +1,23 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="img/dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="img/light.svg">
-  <img alt="Roccat (lizheng419) — AI Application Engineer; RAG, Agents, Enterprise AI. MacBook Pro, gaming, basketball, AI apps. X: @Roccat_fi. Public GitHub statistics." src="img/light.svg" width="840">
-</picture>
-
-[X · @Roccat_fi](https://x.com/Roccat_fi) · [GitHub · @lizheng419](https://github.com/lizheng419)
+<pre>              %###**********##%                  <b>lizheng419@github</b>
+          %#****       =     ++**#%              -----------------------------------------------
+        #***     +*####**+==     +**#            <b>Name:</b> .................................. Roccat
+      #**       ######%#####*=-     +*#          <b>Role:</b> ................. AI Application Engineer
+    #**+     +###**#**####**+++*=     +*#        <b>Host:</b> ............................. MacBook Pro
+   **+      +#####****##*+++*##*+        *       <b>Focus:</b> ........... RAG / Agents / Enterprise AI
+  *         %%#######*--***######+        *      <b>Passions:</b> ....... Gaming / Basketball / AI apps
+ *         *#%##%####=:-==*###*#%         +#
+*           #%%%#+*+---==--+#=--*          +%    Less AI theater. More working systems.
+             *#*===-:::::::::=              *
+                -::::::::::.:-*             +    <b>- Contact -------------------------------------</b>
+                 :::::::::..:=*   +++=           <b>GitHub:</b> ................. <a href="https://github.com/lizheng419">github.com/lizheng419</a>
+                   :::::::-:::+#***#***          <b>X:</b> ................................. <a href="https://x.com/Roccat_fi">@Roccat_fi</a>
+                   *=::-==::-+*******##:    +
+                *#*###*===+****++ +***++-   #    <b>- GitHub Stats / Public -----------------------</b>
+               #% *##% +##***###*##%*###*=:+     <b>Repositories:</b> ................... 39 (37 forks)
+                #* *#*#*#####*   ##**+*##*+      <b>Stars received:</b> ............................ 27
+                *##*##*   %##*+*++ +++:: =       <b>Followers:</b> ................................. 21
+              *##%%### ###*+ +++  **#**##        <b>Authored commits*:</b> ......................... 25
+          *#**#+%####* #**+   ++*******          <b>Code changes*:</b> ..................... +846 / -43
+         **###*####*# #***     *##**#            * Own non-forks, default branches only.
+          %##*+##*##**#**      *#%%              Updated 2026-11-03 UTC
+              *####* #*##*****#</pre>

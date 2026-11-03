@@ -53,17 +53,19 @@ class ProfileTests(unittest.TestCase):
         with patch.object(profile, 'api', side_effect=HTTPError('url', 409, 'empty', {}, None)):
             self.assertEqual(profile.scan_repo('empty'), (0, 0, 0))
 
-    def test_svg_is_valid_escaped_and_within_canvas(self):
+    def test_contact_values_are_links_inside_the_terminal_card(self):
         stats = dict(repos=38, stars=27, followers=21, forks=37,
                      commits=23, added=375, deleted=43, updated='2026-11-03')
-        for theme in ('dark', 'light'):
-            svg = profile.render(theme, stats, '  <&>\n @@@')
-            root = ET.fromstring(svg)
-            self.assertIn('&lt;&amp;&gt;', svg)
-            for node in root.findall('{http://www.w3.org/2000/svg}text'):
-                self.assertLess(float(node.attrib['y']), 500)
-                if node.attrib['x'] == '390':
-                    self.assertLessEqual(len(''.join(node.itertext())), 54)
+        document = profile.render(stats, '  <&>\n @@@')
+        card = ET.fromstring(document)
+        self.assertEqual(card.tag, 'pre')
+        links = {node.text: node.attrib['href'] for node in card.iter('a')}
+        self.assertEqual(links['@Roccat_fi'], 'https://x.com/Roccat_fi')
+        self.assertEqual(links['github.com/lizheng419'], 'https://github.com/lizheng419')
+        self.assertIn('<&>', ''.join(card.itertext()))
+        self.assertNotIn('<img', document)
+        for line in ''.join(card.itertext()).splitlines():
+            self.assertLessEqual(len(line), 96)
 
 
 if __name__ == '__main__':

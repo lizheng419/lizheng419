@@ -2,7 +2,7 @@
 
 Commits and line changes count this author's commits on the default branch
 of owned, public, non-fork repositories; they are not contribution-graph totals.
-An API failure aborts the update and preserves the last published images.
+An API failure aborts the update and preserves the last published README.
 """
 import argparse
 import html
@@ -18,14 +18,6 @@ from urllib.request import Request, urlopen
 
 USER = 'lizheng419'
 ROOT = Path(__file__).resolve().parent
-PALETTES = {
-    'dark': dict(bg='#0d1117', border='#30363d', art='#8b949e',
-                 title='#58a6ff', key='#ffa657', value='#c9d1d9',
-                 dots='#484f58', green='#3fb950', red='#f85149'),
-    'light': dict(bg='#ffffff', border='#d0d7de', art='#57606a',
-                  title='#0969da', key='#953800', value='#24292f',
-                  dots='#afb8c1', green='#1a7f37', red='#cf222e'),
-}
 
 
 def api(path):
@@ -88,66 +80,51 @@ def fetch_stats():
     )
 
 
-def render(theme, stats, art):
-    p = PALETTES[theme]
-    out = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500" '
-        'font-family="Consolas, Menlo, monospace" font-size="13px" role="img" aria-labelledby="title desc">',
-        '<title id="title">Roccat — GitHub profile</title>',
-        '<desc id="desc">AI Application Engineer. MacBook Pro. Gaming, basketball and AI apps. '
-        'X: Roccat_fi. Statistics cover public repositories only. Commits and line changes '
-        'cover authored commits on default branches of owned non-fork repositories.</desc>',
-        f'<rect x="0.5" y="0.5" width="839" height="499" rx="10" fill="{p["bg"]}" stroke="{p["border"]}"/>',
-    ]
-
-    def text(x, y, segments):
-        spans = ''.join(f'<tspan fill="{p[color]}">{html.escape(str(value))}</tspan>'
-                        for value, color in segments)
-        node = f'<text x="{x}" y="{y}" xml:space="preserve">{spans}</text>'
-        out.append(node)
-
-    def kv(key, value):
+def render(stats, art):
+    # GitHub image embeds cannot expose SVG links; native preformatted HTML can.
+    def kv(key, value, url=None):
         value = str(value)
-        dots = '.' * max(1, 54 - len(key) - len(value) - 3)
-        return [(key + ': ', 'key'), (dots + ' ', 'dots'), (value, 'value')]
+        dots = '.' * max(1, 47 - len(key) - len(value) - 3)
+        label = html.escape(value)
+        if url:
+            label = f'<a href="{html.escape(url, quote=True)}">{label}</a>'
+        return f'<b>{html.escape(key)}:</b> {dots} {label}'
 
     lines = art.strip('\n').splitlines()
     if not lines or len(lines) > 26 or max(map(len, lines)) > 46:
         raise ValueError('ASCII portrait must be at most 46 columns by 26 rows')
-    top = 40 + (460 - len(lines) * 15) / 2
-    for index, line in enumerate(lines):
-        text(10, top + index * 15, [(line, 'art')])
-
     n = lambda value: f'{value:,}'
     rows = [
-        [(USER + '@github', 'title')],
-        [('─' * 54, 'dots')],
+        f'<b>{USER}@github</b>',
+        '-' * 47,
         kv('Name', 'Roccat'),
         kv('Role', 'AI Application Engineer'),
         kv('Host', 'MacBook Pro'),
         kv('Focus', 'RAG / Agents / Enterprise AI'),
         kv('Passions', 'Gaming / Basketball / AI apps'),
-        [],
-        [('Less AI theater. More working systems.', 'value')],
-        [],
-        [('─ Contact ' + '─' * 44, 'title')],
-        kv('GitHub', 'github.com/lizheng419'),
-        kv('X', '@Roccat_fi'),
-        [],
-        [('─ GitHub Stats · Public ' + '─' * 30, 'title')],
+        '',
+        'Less AI theater. More working systems.',
+        '',
+        '<b>- Contact ' + '-' * 37 + '</b>',
+        kv('GitHub', 'github.com/lizheng419', 'https://github.com/lizheng419'),
+        kv('X', '@Roccat_fi', 'https://x.com/Roccat_fi'),
+        '',
+        '<b>' + '- GitHub Stats / Public '.ljust(47, '-') + '</b>',
         kv('Repositories', f'{n(stats["repos"])} ({n(stats["forks"])} forks)'),
         kv('Stars received', n(stats['stars'])),
         kv('Followers', n(stats['followers'])),
         kv('Authored commits*', n(stats['commits'])),
-        [('Code changes*: ', 'key'), ('+' + n(stats['added']), 'green'),
-         (' / ', 'dots'), ('-' + n(stats['deleted']), 'red')],
-        [('* Own non-forks, default branches only.', 'art')],
-        [('Updated ' + stats['updated'] + ' UTC', 'art')],
+        kv('Code changes*', '+' + n(stats['added']) + ' / -' + n(stats['deleted'])),
+        '* Own non-forks, default branches only.',
+        'Updated ' + stats['updated'] + ' UTC',
     ]
-    for index, row in enumerate(rows):
-        text(390, 45 + index * 21, row)
-    out.append('</svg>')
-    return '\n'.join(out) + '\n'
+    height = max(len(lines), len(rows))
+    lines = [''] * ((height - len(lines)) // 2) + lines
+    lines += [''] * (height - len(lines))
+    rows += [''] * (height - len(rows))
+    body = '\n'.join((html.escape(left.ljust(46)) + '   ' + right).rstrip()
+                     for left, right in zip(lines, rows))
+    return '<pre>' + body + '</pre>\n'
 
 
 def main():
@@ -156,12 +133,11 @@ def main():
     args = parser.parse_args()
     stats = json.loads(args.snapshot.read_text()) if args.snapshot else fetch_stats()
     art = (ROOT / 'img/avatar.txt').read_text()
-    images = {theme: render(theme, stats, art) for theme in PALETTES}
-    for theme, svg in images.items():
-        target = ROOT / 'img' / f'{theme}.svg'
-        temporary = target.with_suffix('.svg.tmp')
-        temporary.write_text(svg, encoding='utf-8')
-        temporary.replace(target)
+    document = render(stats, art)
+    target = ROOT / 'README.md'
+    temporary = target.with_suffix('.md.tmp')
+    temporary.write_text(document, encoding='utf-8')
+    temporary.replace(target)
     print(json.dumps(stats, sort_keys=True))
 
 
