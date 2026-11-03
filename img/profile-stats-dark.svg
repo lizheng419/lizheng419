@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="184" viewBox="0 0 440 184" font-family="Menlo, Consolas, monospace" font-size="13">
+<text x="12" y="20" fill="#58a6ff" font-size="13" text-anchor="start" xml:space="preserve">GitHub Stats / Public</text>
+<text x="12" y="44" fill="#ffa657" font-size="13" text-anchor="start" xml:space="preserve">Repositories</text><text x="428" y="44" text-anchor="end" fill="#c9d1d9">39 (37 forks)</text>
+<text x="12" y="65" fill="#ffa657" font-size="13" text-anchor="start" xml:space="preserve">Stars received</text><text x="428" y="65" text-anchor="end" fill="#c9d1d9">27</text>
+<text x="12" y="86" fill="#ffa657" font-size="13" text-anchor="start" xml:space="preserve">Followers</text><text x="428" y="86" text-anchor="end" fill="#c9d1d9">21</text>
+<text x="12" y="107" fill="#ffa657" font-size="13" text-anchor="start" xml:space="preserve">Authored commits*</text><text x="428" y="107" text-anchor="end" fill="#c9d1d9">26</text>
+<text x="12" y="128" fill="#ffa657" font-size="13" text-anchor="start" xml:space="preserve">Code changes*</text>
+<text x="336" y="128" fill="#3fb950" font-size="13" text-anchor="end" xml:space="preserve">+917</text>
+<text x="428" y="128" fill="#f85149" font-size="13" text-anchor="end" xml:space="preserve">-220</text>
+<text x="12" y="154" fill="#8b949e" font-size="11" text-anchor="start" xml:space="preserve">* Own non-forks, default branches only.</text>
+<text x="12" y="174" fill="#8b949e" font-size="11" text-anchor="start" xml:space="preserve">Updated 2026-11-03 UTC</text>
+</svg>

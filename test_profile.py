@@ -53,19 +53,30 @@ class ProfileTests(unittest.TestCase):
         with patch.object(profile, 'api', side_effect=HTTPError('url', 409, 'empty', {}, None)):
             self.assertEqual(profile.scan_repo('empty'), (0, 0, 0))
 
-    def test_contact_values_are_links_inside_the_terminal_card(self):
+    def test_contact_values_remain_native_links_inside_the_card(self):
         stats = dict(repos=38, stars=27, followers=21, forks=37,
                      commits=23, added=375, deleted=43, updated='2026-11-03')
-        document = profile.render(stats, '  <&>\n @@@')
-        card = ET.fromstring(document)
-        self.assertEqual(card.tag, 'pre')
+        files = profile.render_profile(stats, '  <&>\n @@@')
+        card = ET.fromstring(files['README.md'])
+        self.assertEqual(card.tag, 'table')
         links = {node.text: node.attrib['href'] for node in card.iter('a')}
         self.assertEqual(links['@Roccat_fi'], 'https://x.com/Roccat_fi')
-        self.assertEqual(links['github.com/lizheng419'], 'https://github.com/lizheng419')
-        self.assertIn('<&>', ''.join(card.itertext()))
-        self.assertNotIn('<img', document)
-        for line in ''.join(card.itertext()).splitlines():
-            self.assertLessEqual(len(line), 96)
+        self.assertEqual(links['@lizheng419'], 'https://github.com/lizheng419')
+        for link in card.iter('a'):
+            self.assertEqual(list(link), [])
+        for image in card.iter('img'):
+            self.assertIn(image.attrib['src'], files)
+            self.assertTrue(image.attrib['alt'])
+        for source in card.iter('source'):
+            self.assertIn(source.attrib['srcset'], files)
+        for theme in ('dark', 'light'):
+            avatar = ET.fromstring(files[f'img/profile-avatar-{theme}.svg'])
+            self.assertIn('<&>', ''.join(avatar.itertext()))
+            stats_svg = ET.fromstring(files[f'img/profile-stats-{theme}.svg'])
+            visible = ''.join(stats_svg.itertext())
+            self.assertIn('+375', visible)
+            self.assertIn('-43', visible)
+            self.assertIn('2026-11-03', visible)
 
 
 if __name__ == '__main__':

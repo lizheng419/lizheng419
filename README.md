@@ -1,23 +1,25 @@
-<pre>              %###**********##%                  <b>lizheng419@github</b>
-          %#****       =     ++**#%              -----------------------------------------------
-        #***     +*####**+==     +**#            <b>Name:</b> .................................. Roccat
-      #**       ######%#####*=-     +*#          <b>Role:</b> ................. AI Application Engineer
-    #**+     +###**#**####**+++*=     +*#        <b>Host:</b> ............................. MacBook Pro
-   **+      +#####****##*+++*##*+        *       <b>Focus:</b> ........... RAG / Agents / Enterprise AI
-  *         %%#######*--***######+        *      <b>Passions:</b> ....... Gaming / Basketball / AI apps
- *         *#%##%####=:-==*###*#%         +#
-*           #%%%#+*+---==--+#=--*          +%    Less AI theater. More working systems.
-             *#*===-:::::::::=              *
-                -::::::::::.:-*             +    <b>- Contact -------------------------------------</b>
-                 :::::::::..:=*   +++=           <b>GitHub:</b> ................. <a href="https://github.com/lizheng419">github.com/lizheng419</a>
-                   :::::::-:::+#***#***          <b>X:</b> ................................. <a href="https://x.com/Roccat_fi">@Roccat_fi</a>
-                   *=::-==::-+*******##:    +
-                *#*###*===+****++ +***++-   #    <b>- GitHub Stats / Public -----------------------</b>
-               #% *##% +##***###*##%*###*=:+     <b>Repositories:</b> ................... 39 (37 forks)
-                #* *#*#*#####*   ##**+*##*+      <b>Stars received:</b> ............................ 27
-                *##*##*   %##*+*++ +++:: =       <b>Followers:</b> ................................. 21
-              *##%%### ###*+ +++  **#**##        <b>Authored commits*:</b> ......................... 26
-          *#**#+%####* #**+   ++*******          <b>Code changes*:</b> .................... +917 / -220
-         **###*####*# #***     *##**#            * Own non-forks, default branches only.
-          %##*+##*##**#**      *#%%              Updated 2026-11-03 UTC
-              *####* #*##*****#</pre>
+<table>
+<tr>
+<td width="38%" valign="middle">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/profile-avatar-dark.svg"/>
+<source media="(prefers-color-scheme: light)" srcset="img/profile-avatar-light.svg"/>
+<img src="img/profile-avatar-light.svg" width="100%" alt="ASCII portrait of Roccat"/>
+</picture>
+</td>
+<td width="62%" valign="top">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/profile-info-dark.svg"/>
+<source media="(prefers-color-scheme: light)" srcset="img/profile-info-light.svg"/>
+<img src="img/profile-info-light.svg" width="100%" alt="Roccat — AI Application Engineer. MacBook Pro. RAG, Agents, Enterprise AI. Gaming, basketball, AI apps."/>
+</picture>
+<p><samp>&#160;&#160;GitHub: <a href="https://github.com/lizheng419">@lizheng419</a><br/>
+&#160;&#160;X:&#160;&#160;&#160;&#160;&#160;&#160;<a href="https://x.com/Roccat_fi">@Roccat_fi</a></samp></p>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="img/profile-stats-dark.svg"/>
+<source media="(prefers-color-scheme: light)" srcset="img/profile-stats-light.svg"/>
+<img src="img/profile-stats-light.svg" width="100%" alt="Public repositories: 39; stars: 27; followers: 21; authored commits on owned non-fork default branches: 26; lines added: 917; removed: 220; updated 2026-11-03 UTC."/>
+</picture>
+</td>
+</tr>
+</table>
